@@ -19,5 +19,14 @@ export const QUERY_CURRENT_WEATHER = gql`
         all
       }
     }
+    soil {
+      d10
+      moisture
+      t0
+    }
+    uvi {
+      uvi
+    }
+
   }
 `
