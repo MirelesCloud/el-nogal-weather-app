@@ -199,6 +199,27 @@ export type CurrentWeatherQuery = (
   )> }
 );
 
+export type ForecastDataQueryVariables = {};
+
+
+export type ForecastDataQuery = (
+  { __typename?: 'Query' }
+  & { forecast: Maybe<Array<Maybe<(
+    { __typename?: 'Forecast' }
+    & Pick<Forecast, 'dt'>
+    & { main: Maybe<(
+      { __typename?: 'Main' }
+      & Pick<Main, 'temp' | 'pressure' | 'humidity' | 'temp_min' | 'temp_max' | 'sea_level' | 'grnd_level' | 'temp_kf'>
+    )>, wind: Maybe<(
+      { __typename?: 'Wind' }
+      & Pick<Wind, 'speed' | 'deg'>
+    )>, clouds: Maybe<(
+      { __typename?: 'Clouds' }
+      & Pick<Clouds, 'all'>
+    )> }
+  )>>> }
+);
+
 export type NdviDataQueryVariables = {};
 
 
@@ -313,6 +334,72 @@ export function useCurrentWeatherLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type CurrentWeatherQueryHookResult = ReturnType<typeof useCurrentWeatherQuery>;
 export type CurrentWeatherLazyQueryHookResult = ReturnType<typeof useCurrentWeatherLazyQuery>;
 export type CurrentWeatherQueryResult = ApolloReactCommon.QueryResult<CurrentWeatherQuery, CurrentWeatherQueryVariables>;
+export const ForecastDataDocument = gql`
+    query ForecastData {
+  forecast {
+    dt
+    main {
+      temp
+      pressure
+      humidity
+      temp_min
+      temp_max
+      sea_level
+      grnd_level
+      temp_kf
+    }
+    wind {
+      speed
+      deg
+    }
+    clouds {
+      all
+    }
+  }
+}
+    `;
+export type ForecastDataComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ForecastDataQuery, ForecastDataQueryVariables>, 'query'>;
+
+    export const ForecastDataComponent = (props: ForecastDataComponentProps) => (
+      <ApolloReactComponents.Query<ForecastDataQuery, ForecastDataQueryVariables> query={ForecastDataDocument} {...props} />
+    );
+    
+export type ForecastDataProps<TChildProps = {}> = ApolloReactHoc.DataProps<ForecastDataQuery, ForecastDataQueryVariables> & TChildProps;
+export function withForecastData<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ForecastDataQuery,
+  ForecastDataQueryVariables,
+  ForecastDataProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, ForecastDataQuery, ForecastDataQueryVariables, ForecastDataProps<TChildProps>>(ForecastDataDocument, {
+      alias: 'forecastData',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useForecastDataQuery__
+ *
+ * To run a query within a React component, call `useForecastDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useForecastDataQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useForecastDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useForecastDataQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ForecastDataQuery, ForecastDataQueryVariables>) {
+        return ApolloReactHooks.useQuery<ForecastDataQuery, ForecastDataQueryVariables>(ForecastDataDocument, baseOptions);
+      }
+export function useForecastDataLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ForecastDataQuery, ForecastDataQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ForecastDataQuery, ForecastDataQueryVariables>(ForecastDataDocument, baseOptions);
+        }
+export type ForecastDataQueryHookResult = ReturnType<typeof useForecastDataQuery>;
+export type ForecastDataLazyQueryHookResult = ReturnType<typeof useForecastDataLazyQuery>;
+export type ForecastDataQueryResult = ApolloReactCommon.QueryResult<ForecastDataQuery, ForecastDataQueryVariables>;
 export const NdviDataDocument = gql`
     query NdviData {
   ndvi {

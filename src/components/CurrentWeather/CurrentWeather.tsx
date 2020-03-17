@@ -15,6 +15,7 @@ interface Props {
 }
 
 const CurrentWeather: React.FC<Props> = ({ data }) => {
+  console.log(data)
 
   let time = new Date(data.weather?.dt!*1000)
   let current = (((data.weather?.main?.temp!) - 273.15) * (9/5) + 32).toFixed(0);
@@ -25,8 +26,6 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
   let moisture = (data.soil?.moisture!).toFixed(2)
   let surfaceTemp = (((data.soil?.t0!) - 273.15) * (9/5) + 32).toFixed(0);
 
-
-  console.log(time)
   return (
     <MainContainer>
       <ContainerDetails>

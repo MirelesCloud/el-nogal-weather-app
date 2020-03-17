@@ -129,7 +129,7 @@ export const Footer = styled.footer`
 export const Card = styled('div')`
     position: relative;
     flex-basis: 100%;
-    flex-basis: calc(25% - 20px);
+    flex-basis: calc(20% - 10px);
     margin: 10px;
     cursor: pointer;
     transition: 0.3s all ease-in;
@@ -144,11 +144,11 @@ export const Card = styled('div')`
     
 
     @media (max-width: 992px) {
-      flex-basis: calc( 33.333% - 20px);
+      flex-basis: calc( 15% - 20px);
     }
 
     @media (max-width: 600px) {
-      flex-basis: calc(50% - 20px)
+      flex-basis: calc(25% - 20px)
     }
 
     &:hover {
@@ -178,9 +178,9 @@ export const CardHeader = styled('div')`
 `;
 
 export const CardText = styled('p')`
-  padding: 5px;
-  margin: 3px;
-  font-size: 0.9rem;
+  padding: 2px;
+  margin: 2px;
+  font-size: 0.7rem;
 `
 
 export const CardFooter = styled('div')`

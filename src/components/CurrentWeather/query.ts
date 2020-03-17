@@ -4,6 +4,11 @@ export const QUERY_CURRENT_WEATHER = gql`
   query CurrentWeather {
     weather {
       dt
+      weather {
+        id
+        main
+        description
+      }
       main {
         temp 
         temp_min
