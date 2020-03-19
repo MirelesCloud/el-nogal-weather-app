@@ -180,7 +180,10 @@ export type CurrentWeatherQuery = (
   & { weather: Maybe<(
     { __typename?: 'CurrentWeather' }
     & Pick<CurrentWeather, 'dt'>
-    & { main: Maybe<(
+    & { weather: Maybe<Array<Maybe<(
+      { __typename?: 'Weather' }
+      & Pick<Weather, 'id' | 'main' | 'description'>
+    )>>>, main: Maybe<(
       { __typename?: 'Main' }
       & Pick<Main, 'temp' | 'temp_min' | 'temp_max' | 'pressure' | 'humidity'>
     )>, wind: Maybe<(
@@ -207,7 +210,10 @@ export type ForecastDataQuery = (
   & { forecast: Maybe<Array<Maybe<(
     { __typename?: 'Forecast' }
     & Pick<Forecast, 'dt'>
-    & { main: Maybe<(
+    & { weather: Maybe<Array<Maybe<(
+      { __typename?: 'Weather' }
+      & Pick<Weather, 'id' | 'main' | 'description'>
+    )>>>, main: Maybe<(
       { __typename?: 'Main' }
       & Pick<Main, 'temp' | 'pressure' | 'humidity' | 'temp_min' | 'temp_max' | 'sea_level' | 'grnd_level' | 'temp_kf'>
     )>, wind: Maybe<(
@@ -267,6 +273,11 @@ export const CurrentWeatherDocument = gql`
     query CurrentWeather {
   weather {
     dt
+    weather {
+      id
+      main
+      description
+    }
     main {
       temp
       temp_min
@@ -338,6 +349,11 @@ export const ForecastDataDocument = gql`
     query ForecastData {
   forecast {
     dt
+    weather {
+      id
+      main
+      description
+    }
     main {
       temp
       pressure

@@ -24,7 +24,6 @@ const SatImages: React.FC<Props> = ({ data }) => {
       return image
   }, [image])
 
-  console.log(image)
 
   return (
     <ContentWrapper>

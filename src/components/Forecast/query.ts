@@ -4,6 +4,11 @@ export const FORECAST_DATA = gql`
   query ForecastData {
     forecast {
       dt 
+      weather {
+        id
+        main
+        description
+      }
       main {
         temp
         pressure

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { NdviDataQuery } from '../../generated/graphql'
-import { LineChart, Line } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import {
   
   ContentWrapper,
@@ -19,7 +19,10 @@ const NdviData: React.FC<Props> = ({ data }) => {
   return (
     <ContentWrapper>
       <LineChart width={400} height={400} data={result as any}>
-        <Line type="monotone" dataKey="cl" stroke="#8884d8"/>
+        <Line type="monotone" dataKey="data.median" stroke="#8884d8"/>
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
+        <XAxis dataKey="dt"/>
+        <YAxis/>
       </LineChart>
     </ContentWrapper>
   )

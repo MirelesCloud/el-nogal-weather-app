@@ -214,10 +214,22 @@ export const ContainerHeader = styled.div`
   justify-content: center;
 `
 
+export const ContainerImage = styled.img`
+  border-radius: 50%;
+  width: 300px;
+  border: 1px solid #ccc
+  padding: 5px;
+`
+
 export const ContainerText = styled.p`
     margin-right: 25px;
 `
+export const ContainerList = styled.ul`
+   list-style-type: none;
+`
 
+export const ListItem = styled.li`
+`
 
 /* Modal */
 export const Overlay = styled.div`
