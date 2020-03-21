@@ -177,7 +177,7 @@ export const CardHeader = styled('div')`
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 `;
 
-export const CardText = styled('p')`
+export const CardText = styled('div')`
   padding: 2px;
   margin: 2px;
   font-size: 0.7rem;

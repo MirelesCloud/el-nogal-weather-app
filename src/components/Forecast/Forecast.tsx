@@ -6,6 +6,8 @@ import {
   Card,
   CardBody,
   CardText,
+  ContainerList,
+  ListItem,
   
 } from "../../Styles"
 
@@ -21,16 +23,19 @@ const Forecast: React.FC<Props> = ({ data }) => {
           !!day && (
             <Card key={day.dt!}>
               <CardBody>
-                <CardText>{new Date(day.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}</CardText>
-                <CardText>Temp: {((((day.main?.temp!) - 273.15) * 9/5) + 32).toFixed(0)} F</CardText>
-                <CardText>Wind: {((day.wind?.speed!) * 2.237).toFixed(0)} Mph</CardText>
-                <CardText>Clouds: {day.clouds?.all!} %</CardText>
-                <CardText>Description: {day.weather?.map(i => i?.description)}</CardText>
+                <CardText>
+                  <ContainerList>
+                    <ListItem>{new Date(day.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}</ListItem>
+                    <ListItem>Temp: {((((day.main?.temp!) - 273.15) * 9/5) + 32).toFixed(0)} F</ListItem>
+                    <ListItem>Wind: {((day.wind?.speed!) * 2.237).toFixed(0)} Mph</ListItem>
+                    <ListItem>Clouds: {day.clouds?.all!} %</ListItem>
+                    <ListItem>Description: {day.weather?.map(i => i?.description)}</ListItem>
+                  </ContainerList>
+                </CardText>
               </CardBody>
             </Card>
           )
           )}
-
     </ContentWrapper>
   )
 }
