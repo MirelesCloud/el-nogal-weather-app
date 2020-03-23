@@ -29,7 +29,7 @@ export type Clouds = {
 export type CurrentWeather = {
    __typename?: 'CurrentWeather';
   dt?: Maybe<Scalars['Int']>;
-  weather?: Maybe<Array<Maybe<Weather>>>;
+  weather?: Maybe<Weather>;
   main?: Maybe<Main>;
   wind?: Maybe<Wind>;
   clouds?: Maybe<Clouds>;
@@ -46,7 +46,7 @@ export type Data = {
 export type Forecast = {
    __typename?: 'Forecast';
   dt?: Maybe<Scalars['Int']>;
-  weather?: Maybe<Array<Maybe<Weather>>>;
+  weather?: Maybe<Weather>;
   main?: Maybe<Main>;
   wind?: Maybe<Wind>;
   rain?: Maybe<Rain>;
@@ -78,7 +78,7 @@ export type Ndvi = {
   dt?: Maybe<Scalars['Int']>;
   source?: Maybe<Scalars['String']>;
   zoom?: Maybe<Scalars['Int']>;
-  dc?: Maybe<Scalars['Int']>;
+  dc?: Maybe<Scalars['Float']>;
   cl?: Maybe<Scalars['Float']>;
   data?: Maybe<NdviData>;
 };
@@ -160,7 +160,7 @@ export type Uvi = {
 
 export type Weather = {
    __typename?: 'Weather';
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['Int']>;
   main?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
@@ -180,10 +180,10 @@ export type CurrentWeatherQuery = (
   & { weather: Maybe<(
     { __typename?: 'CurrentWeather' }
     & Pick<CurrentWeather, 'dt'>
-    & { weather: Maybe<Array<Maybe<(
+    & { weather: Maybe<(
       { __typename?: 'Weather' }
-      & Pick<Weather, 'id' | 'main' | 'description'>
-    )>>>, main: Maybe<(
+      & Pick<Weather, 'id' | 'main' | 'description' | 'icon'>
+    )>, main: Maybe<(
       { __typename?: 'Main' }
       & Pick<Main, 'temp' | 'temp_min' | 'temp_max' | 'pressure' | 'humidity'>
     )>, wind: Maybe<(
@@ -210,10 +210,10 @@ export type ForecastDataQuery = (
   & { forecast: Maybe<Array<Maybe<(
     { __typename?: 'Forecast' }
     & Pick<Forecast, 'dt'>
-    & { weather: Maybe<Array<Maybe<(
+    & { weather: Maybe<(
       { __typename?: 'Weather' }
-      & Pick<Weather, 'id' | 'main' | 'description'>
-    )>>>, main: Maybe<(
+      & Pick<Weather, 'id' | 'main' | 'description' | 'icon'>
+    )>, main: Maybe<(
       { __typename?: 'Main' }
       & Pick<Main, 'temp' | 'pressure' | 'humidity' | 'temp_min' | 'temp_max' | 'sea_level' | 'grnd_level' | 'temp_kf'>
     )>, wind: Maybe<(
@@ -277,6 +277,7 @@ export const CurrentWeatherDocument = gql`
       id
       main
       description
+      icon
     }
     main {
       temp
@@ -353,6 +354,7 @@ export const ForecastDataDocument = gql`
       id
       main
       description
+      icon
     }
     main {
       temp

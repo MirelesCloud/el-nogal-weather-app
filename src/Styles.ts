@@ -160,7 +160,7 @@ export const CardBody = styled('div')`
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: 0.5rem;
 `
 
 export const CardImage = styled('img')`

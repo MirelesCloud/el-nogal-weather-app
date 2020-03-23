@@ -20,10 +20,13 @@ const NdviData: React.FC<Props> = ({ data }) => {
   const result = data.ndvi
   const date = data?.ndvi!.map(date => new Date(date?.dt!*1000).toLocaleDateString())
   console.log(date)
+  
+
   return (
     <ContentWrapper>
-      <ResponsiveContainer width={900} height={400}>
-        <LineChart data={result as any}>
+      <h3>NDVI History</h3>
+     
+        <LineChart width={900} height={300} data={result as any}>
           <Line type="monotone" dataKey="data.max" stroke="#8884d8"/>
           <Line type="monotone" dataKey="data.mean" stroke="#82ca9d" />
           <Line type="monotone" dataKey="data.min" stroke="#8884e1"/>
@@ -33,7 +36,7 @@ const NdviData: React.FC<Props> = ({ data }) => {
           <XAxis dataKey="dt" domain={['auto', 'auto']} tickFormatter={unixTime => moment(unixTime*1000).format('MMM DD YYYY')}/>
           <YAxis/>
         </LineChart>
-      </ResponsiveContainer>
+ 
     </ContentWrapper>
   )
 }

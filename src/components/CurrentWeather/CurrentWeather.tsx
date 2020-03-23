@@ -21,7 +21,6 @@ interface Props {
 }
 
 const CurrentWeather: React.FC<Props> = ({ data }) => {
-  console.log(data)
 
   let current = (((data.weather?.main?.temp!) - 273.15) * (9/5) + 32).toFixed(0);
   let high = (((data.weather?.main?.temp_max!) - 273.15) * (9/5) + 32).toFixed(0);
@@ -30,6 +29,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
   let pressure = (data.weather?.main?.pressure!/1000).toFixed(2);
   let moisture = (data.soil?.moisture!).toFixed(2)
   let surfaceTemp = (((data.soil?.t0!) - 273.15) * (9/5) + 32).toFixed(0);
+  let icon = `http://openweathermap.org/img/wn/${data.weather?.weather?.icon}@2x.png`
 
   return (
     <MainContainer>
@@ -42,11 +42,13 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
             <h3>Current Conditions</h3>
           </ContainerHeader>
           <ContainerText>{new Date(data.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}</ContainerText>
-        
             <ContainerList>
+            <ListItem> <img src={icon} style={{width: "50px"}} alt="icon"/></ListItem>
               <ListItem>  <strong>Current Temperature: </strong>{current}{" "}F</ListItem>
               <ListItem> <strong>High: </strong>{high}{" "}F</ListItem>
               <ListItem> <strong>Low: </strong>{low}{" "}F</ListItem>
+              <ListItem> <strong>Condition: </strong>{data.weather?.weather?.description}</ListItem>
+              <hr/>
               <ListItem> <strong>Pressure: </strong>{pressure}{" "}Bar</ListItem>
               <ListItem> <strong>Humidity: </strong>{data.weather?.main?.humidity} {" "}%</ListItem>
               <ListItem>  <strong>Wind Speed: </strong>{windSpeed}{" "}Mph</ListItem>
@@ -55,7 +57,6 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
               <ListItem><strong>Surface Temperature: </strong>{surfaceTemp}{" "}F</ListItem>
               <ListItem><strong>UV Index: </strong>{data.uvi?.uvi!}</ListItem>
             </ContainerList>
-        
         </ContainerRight>
       </ContainerDetails>
     </MainContainer>

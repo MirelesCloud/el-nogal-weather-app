@@ -8,6 +8,7 @@ export const FORECAST_DATA = gql`
         id
         main
         description
+        icon
       }
       main {
         temp

@@ -8,6 +8,7 @@ export const QUERY_CURRENT_WEATHER = gql`
         id
         main
         description
+        icon
       }
       main {
         temp 
