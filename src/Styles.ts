@@ -37,7 +37,15 @@ export const Row = styled.div`
     display: table;
   }
 `
-
+export const NdviImageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
+export const NdviImage = styled.img`
+  width: 200px;
+  height: auto
+`
 
 /* Header */
 export const Nav = styled('div')`
