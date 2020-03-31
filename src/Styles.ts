@@ -1,9 +1,44 @@
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 export const PageContainer = styled.div`
   position: relative;
   min-height: 100vh;
 `
+
+export const PageHeader = styled.div`
+  display: flex
+  justify-content: center;
+`
+
+export const PageTitle = styled.h3`
+
+`
+export const Column = styled.div`
+  float: left;
+  width: 50%;
+
+  @media(max-width: 778px) {
+    width: 100%;
+  }
+`
+
+export const SingleColumn= styled.div`
+  float left:
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
+
+export const Row = styled.div`
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+`
+
+
 /* Header */
 export const Nav = styled('div')`
     background-color: #f7f7f5;
@@ -33,13 +68,9 @@ export const NavLeft = styled('div')`
       font-size: 1.3em;
     }
 
-    @media(max-width: 650px) {
-      font-size: 1.1em;
-    }
+   
 
-    @media(max-width: 378px) {
-      font-size: 0.7em;
-    }
+   
 `
 
 export const NavCenter = styled('div')`
@@ -91,6 +122,32 @@ export const Button = styled.button`
  font-size: 14px;
  margin-left: 20px
 `
+export const NavMenu = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+`
+
+export const MenuButton = styled.li`
+  float: left;
+  text-align: center;
+`
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  padding: 16px;
+  display: block;
+  
+  &:hover {
+    background-color: #f7f7f5;
+  }
+
+  &:visited {
+    color: #000000;
+  }
+  
+`
 
 /*Load Message */
 export const LoadContainer = styled.div`
@@ -110,9 +167,11 @@ export const MainContainer = styled('div')`
 `
 
 export const ContentWrapper = styled('div')`
-  margin-top: 50px;
+  margin: 50px 25px;
   display: flex;
   flex-wrap: wrap;
+  flex-flow: center;
+  
 `
 
 export const Footer = styled.footer`
@@ -125,15 +184,46 @@ export const Footer = styled.footer`
   text-align: center;
 `
 
+/*Table */
+
+export const Table = styled.table`
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 14px;
+`
+export const TableBody = styled.tbody``
+
+export const TableHeader = styled.th`
+  text-align: left;
+  padding: 5px;
+`
+
+export const TableCell = styled.td`
+  text-align: left;
+  padding: 5px;
+`
+
+export const TableRow = styled.tr`
+  &:nth-of-type(odd) {
+    background-color: #f2f2f2;
+  }
+`
+
+export const TableImage = styled.img`
+ max-width: 3rem;
+ height: auto;
+`
 /* Card */
 export const Card = styled('div')`
     position: relative;
     flex-basis: 100%;
-    flex-basis: calc(20% - 10px);
+    flex-basis: calc(20% - 5px);
     margin: 10px;
     cursor: pointer;
     transition: 0.3s all ease-in;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -152,7 +242,7 @@ export const Card = styled('div')`
     }
 
     &:hover {
-      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.2);
+      background-color: rgba(204, 239, 266, 0.3);
     }
 `
 
@@ -192,25 +282,36 @@ export const CardFooter = styled('div')`
 /* Weather */
 export const ContainerDetails = styled('div')`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 20%;
 `
 
 export const ContainerLeft = styled('div')`
-  margin-right: 40px;
-  width: 300px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
 `
 
 export const ContainerRight = styled('div')`
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media(max-width: 600px) {
+    margin-top: 50px;
+  }
+  
 `
 
 export const ContainerHeader = styled.div`
   display: flex;
-  align-items: center;
+  font-weight: 600;
   justify-content: center;
 `
 
@@ -272,26 +373,7 @@ export const ModalContent = styled.div`
   transition: 0.3s all ease-in;
 `
 
-
-export const Column = styled.div`
-  float: left;
-  width: 50%;
-
-  @media(max-width: 378px) {
-    width: 100%;
-  }
-`
-
-export const Row = styled.div`
-  &::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-`
-
 export const ModalHeader = styled.h4``
-
 
 export const ModalText = styled.p`
   padding: 0px;

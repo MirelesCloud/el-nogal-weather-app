@@ -114,7 +114,7 @@ export type SatImages = {
    __typename?: 'SatImages';
   dt?: Maybe<Scalars['Int']>;
   type?: Maybe<Scalars['String']>;
-  dc?: Maybe<Scalars['Int']>;
+  dc?: Maybe<Scalars['Float']>;
   cl?: Maybe<Scalars['Float']>;
   sun?: Maybe<Sun>;
   image?: Maybe<Image>;

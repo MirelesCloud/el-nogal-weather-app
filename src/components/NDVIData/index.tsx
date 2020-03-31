@@ -1,18 +1,19 @@
 import * as React from 'react'
 import { useNdviDataQuery } from '../../generated/graphql'
 import NdviData from './NDVIData'
+import { LoadContainer } from '../../Styles'
+import Spinner from '../../Spinner'
 
 const NdviDataContainer = () => {
   const { data, error, loading } = useNdviDataQuery();
 
   if (loading) {
-    return <div>Loading...</div>
+    return <LoadContainer><Spinner/></LoadContainer>
   }
 
   if (error || !data) {
-    return <div>Error!!</div>
+    return <LoadContainer>Error!!</LoadContainer>
   }
-
   return <NdviData data={data}/>;
 }
 

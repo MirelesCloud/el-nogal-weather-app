@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { NdviDataQuery } from '../../generated/graphql'
 import moment from 'moment'
-import * as V from 'victory'
-import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import {
   
   ContentWrapper,
@@ -16,10 +15,8 @@ interface Props {
 
 
 const NdviData: React.FC<Props> = ({ data }) => {
-  console.log(data)
   const result = data.ndvi
   const date = data?.ndvi!.map(date => new Date(date?.dt!*1000).toLocaleDateString())
-  console.log(date)
   
 
   return (

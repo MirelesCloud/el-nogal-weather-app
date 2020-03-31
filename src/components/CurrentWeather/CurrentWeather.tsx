@@ -1,14 +1,12 @@
 import * as React from 'react'
 import { CurrentWeatherQuery } from '../../generated/graphql'
-
 import {
-  MainContainer,
+  ContentWrapper,
   ContainerDetails,
   ContainerLeft,
   ContainerRight,
   ContainerImage,
   ContainerHeader,
-  ContainerText,
   ContainerList,
   ListItem,
 
@@ -31,35 +29,38 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
   let surfaceTemp = (((data.soil?.t0!) - 273.15) * (9/5) + 32).toFixed(0);
   let icon = `http://openweathermap.org/img/wn/${data.weather?.weather?.icon}@2x.png`
 
+ 
   return (
-    <MainContainer>
-      <ContainerDetails>
-        <ContainerLeft>
-          <ContainerImage src={feature} />
-        </ContainerLeft>
-        <ContainerRight>
-          <ContainerHeader>
-            <h3>Current Conditions</h3>
-          </ContainerHeader>
-          <ContainerText>{new Date(data.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}</ContainerText>
-            <ContainerList>
-            <ListItem> <img src={icon} style={{width: "50px"}} alt="icon"/></ListItem>
-              <ListItem>  <strong>Current Temperature: </strong>{current}{" "}F</ListItem>
-              <ListItem> <strong>High: </strong>{high}{" "}F</ListItem>
-              <ListItem> <strong>Low: </strong>{low}{" "}F</ListItem>
-              <ListItem> <strong>Condition: </strong>{data.weather?.weather?.description}</ListItem>
-              <hr/>
-              <ListItem> <strong>Pressure: </strong>{pressure}{" "}Bar</ListItem>
-              <ListItem> <strong>Humidity: </strong>{data.weather?.main?.humidity} {" "}%</ListItem>
-              <ListItem>  <strong>Wind Speed: </strong>{windSpeed}{" "}Mph</ListItem>
-              <ListItem><strong>Clouds: </strong>{data.weather?.clouds?.all!}{" "}%</ListItem>
-              <ListItem> <strong>Soil Moisture: </strong>{moisture}{" "}m3/m3</ListItem>
-              <ListItem><strong>Surface Temperature: </strong>{surfaceTemp}{" "}F</ListItem>
-              <ListItem><strong>UV Index: </strong>{data.uvi?.uvi!}</ListItem>
-            </ContainerList>
-        </ContainerRight>
-      </ContainerDetails>
-    </MainContainer>
+  <>
+  <ContentWrapper>
+        <ContainerDetails>
+          <ContainerLeft>
+            <ContainerImage src={feature} />
+          </ContainerLeft>
+          <ContainerRight>
+            <ContainerHeader>
+              {new Date(data.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}
+            </ContainerHeader>
+            
+              <ContainerList>
+              <ListItem> <img src={icon} style={{width: "50px"}} alt="icon"/></ListItem>
+                <ListItem>  <strong>Current Temperature: </strong>{current}{" "}F</ListItem>
+                <ListItem> <strong>High: </strong>{high}{" "}F</ListItem>
+                <ListItem> <strong>Low: </strong>{low}{" "}F</ListItem>
+                <ListItem> <strong>Condition: </strong>{data.weather?.weather?.description}</ListItem>
+                <hr/>
+                <ListItem> <strong>Pressure: </strong>{pressure}{" "}Bar</ListItem>
+                <ListItem> <strong>Humidity: </strong>{data.weather?.main?.humidity} {" "}%</ListItem>
+                <ListItem>  <strong>Wind Speed: </strong>{windSpeed}{" "}Mph</ListItem>
+                <ListItem><strong>Clouds: </strong>{data.weather?.clouds?.all!}{" "}%</ListItem>
+                <ListItem> <strong>Soil Moisture: </strong>{moisture}{" "}m3/m3</ListItem>
+                <ListItem><strong>Surface Temperature: </strong>{surfaceTemp}{" "}F</ListItem>
+                <ListItem><strong>UV Index: </strong>{data.uvi?.uvi!}</ListItem>
+              </ContainerList>
+          </ContainerRight>
+        </ContainerDetails>
+    </ContentWrapper>
+  </>
   )
 }
 

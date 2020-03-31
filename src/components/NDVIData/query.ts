@@ -18,5 +18,6 @@ export const QUERY_NDVI_DATA = gql`
         mean
       }
     }
+   
   }
 `

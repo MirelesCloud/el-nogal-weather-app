@@ -8,15 +8,11 @@ const Header: React.FC = () => {
       <NavHeader>
         <NavLeft>El Nogal</NavLeft>
         <NavCenter>
-          Weather
-
         </NavCenter>
         <NavRight>
-          NDVI
         </NavRight>
       </NavHeader>
     </Nav>
-
   )
 }
 

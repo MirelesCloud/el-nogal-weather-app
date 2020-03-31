@@ -1,16 +1,18 @@
 import * as React from 'react'
 import { useCurrentWeatherQuery } from '../../generated/graphql'
 import CurrentWeather from './CurrentWeather'
+import Spinner from '../../Spinner'
+import { LoadContainer } from '../../Styles'
 
 const CurrentWeatherContainer = () => {
   const { data, error, loading } = useCurrentWeatherQuery();
 
   if (loading) {
-    return <div>Loading...</div>
+    return <LoadContainer><Spinner/></LoadContainer>
   }
 
   if (error || !data) {
-    return <div>Error!!</div>
+    return <LoadContainer>Error!!</LoadContainer>
   }
 
   return <CurrentWeather data={data}/>;
