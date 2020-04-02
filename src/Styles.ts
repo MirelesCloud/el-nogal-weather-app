@@ -47,6 +47,17 @@ export const NdviImage = styled.img`
   height: auto
 `
 
+export const MarkerBtn = styled.button`
+  position: absolute;
+  top: 50px;
+  left: 150px;
+  z-index: 2000;
+  width: 100px;
+  height: 50px;
+  color: gray;
+`
+
+
 /* Header */
 export const Nav = styled('div')`
     background-color: #f7f7f5;

@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { SatImagesQuery } from '../../generated/graphql'
-import { Map, Marker, Popup, TileLayer, LayerGroup, Polygon } from 'react-leaflet'
-import { LatLngTuple } from 'leaflet'
+import { LayerContextProvider } from './LayerContext'
+import LeafletMap from './LeafletMap'
 import {
-  
   ContentWrapper,
   Card,
   NdviImageContainer,
@@ -12,9 +11,7 @@ import {
   CardBody,
   CardText,
   Line
-  
-} from "../../Styles"
-import { LayerContext, LayerContextProvider } from './LayerContext'
+  } from "../../Styles"
 
 const API_KEY = process.env.REACT_APP_AGRO_API_KEY
 
@@ -38,11 +35,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
           <LayerContextProvider>
             <LeafletMap/>
           </LayerContextProvider>
-          
-         
-
         </NdviImageContainer>
-
       </ContentWrapper>
       <Line/>
       <ContentWrapper>
@@ -58,40 +51,12 @@ const SatImages: React.FC<Props> = ({ data }) => {
             </Card>
           ))
         }
-       
-        
       </ContentWrapper>
-    
     </>
-    
   )
 }
 
 export default SatImages
 
 
-const defaultLatLng: LatLngTuple = [36.375999, -119.646236]
-const zoom: number = 16
-
-const LeafletMap: React.FC = () => {
-
-  const { point } = useContext(LayerContext)
-  return (
-    <Map
-      style={{height: "50vh", width: "100vw"}}
-      center={defaultLatLng}
-      zoom={zoom}
-    >
-      <LayerGroup>
-        {point}
-
-      </LayerGroup>
-      <TileLayer
-         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors">
-      </TileLayer>
-
-    </Map>
-  )
-}
 
