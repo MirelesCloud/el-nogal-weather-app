@@ -3,10 +3,8 @@ import { NdviDataQuery } from '../../generated/graphql'
 import moment from 'moment'
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import {
-  
   ContentWrapper,
   SingleColumn
-  
 } from "../../Styles"
 
 interface Props {
@@ -15,7 +13,6 @@ interface Props {
 
 const NdviData: React.FC<Props> = ({ data }) => {
   const result = data?.ndvi?.reverse()
-  const date = data?.ndvi!.map(date => new Date(date?.dt!*1000).toLocaleDateString())
 
   return (
     <>

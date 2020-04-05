@@ -6,9 +6,7 @@ import LeafletMap from './LeafletMap'
 import {
   ContentWrapper,
   Card,
-  CardImage,
   NdviImageContainer,
-  NdviImage,
   CardBody,
   CardText,
   Line
@@ -35,7 +33,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
       <ContentWrapper>
         <NdviImageContainer>
           <LayerContextProvider>
-            <LeafletMap />
+            <LeafletMap image={image} />
           </LayerContextProvider>
         </NdviImageContainer>
       </ContentWrapper>

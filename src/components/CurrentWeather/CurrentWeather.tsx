@@ -41,9 +41,8 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
             <ContainerHeader>
               {new Date(data.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}
             </ContainerHeader>
-            
               <ContainerList>
-              <ListItem> <img src={icon} style={{width: "50px"}} alt="icon"/></ListItem>
+                <ListItem> <img src={icon} style={{width: "50px"}} alt="icon"/></ListItem>
                 <ListItem>  <strong>Current Temperature: </strong>{current}{" "}F</ListItem>
                 <ListItem> <strong>High: </strong>{high}{" "}F</ListItem>
                 <ListItem> <strong>Low: </strong>{low}{" "}F</ListItem>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { point } from 'leaflet'
 
 const LayerContext: any = React.createContext({})
 
