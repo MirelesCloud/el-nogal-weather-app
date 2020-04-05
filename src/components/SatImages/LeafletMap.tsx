@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Map, TileLayer, LayerGroup, Polygon } from 'react-leaflet'
-import { LatLngTuple } from 'leaflet'
+import { LatLngTuple, ImageOverlay as LeafletImageOverlay, latLngBounds } from 'leaflet'
 //import { LayerContext } from './AddMarkerButton'
 
 const defaultLatLng: LatLngTuple = [36.375999, -119.646236]
@@ -28,16 +28,13 @@ const LeafletMap: React.FC = () => {
       center={defaultLatLng}
       zoom={zoom}
     >
-     
       <LayerGroup>
-        
-
       </LayerGroup>
       <TileLayer
          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors">
       </TileLayer>
-      <Polygon color="yellow" positions={polygon as any}/>
+      <Polygon color="blue" positions={polygon as any}/>
 
     </Map>
   )

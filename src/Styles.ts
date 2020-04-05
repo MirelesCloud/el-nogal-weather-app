@@ -26,6 +26,7 @@ export const Column = styled.div`
 export const SingleColumn= styled.div`
   float left:
   display: flex;
+  margin: 20px;
   width: 100%;
   justify-content: center;
 `

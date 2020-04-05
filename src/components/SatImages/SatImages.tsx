@@ -6,6 +6,7 @@ import LeafletMap from './LeafletMap'
 import {
   ContentWrapper,
   Card,
+  CardImage,
   NdviImageContainer,
   NdviImage,
   CardBody,
@@ -23,6 +24,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
   const [image, setImage] = useState("")
   const [imageId, setImageId] = useState("")
   const [url, setUrl] = useState((data?.images as any)[0].image?.ndvi)
+  const result = data?.images?.reverse()
   
   useEffect(() => {
     setImageId((url as any).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
@@ -33,17 +35,18 @@ const SatImages: React.FC<Props> = ({ data }) => {
       <ContentWrapper>
         <NdviImageContainer>
           <LayerContextProvider>
-            <LeafletMap/>
+            <LeafletMap />
           </LayerContextProvider>
         </NdviImageContainer>
       </ContentWrapper>
       <Line/>
+      
       <ContentWrapper>
-        {!!data.images &&
-          data.images.map((img) => 
+        {!!result &&
+          result.map((img) => 
           !!image && (
             <Card key={img?.dt!}>
-              <CardBody  onClick={() => setUrl(img?.image?.truecolor!)}>
+              <CardBody  onClick={() => setUrl(img?.image?.ndvi)}>
                 <CardText>
                 {new Date(img?.dt!* 1000).toLocaleDateString([], {day: 'numeric', month: 'short', year: 'numeric'})}
                 </CardText>
