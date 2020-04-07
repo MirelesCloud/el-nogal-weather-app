@@ -19,15 +19,16 @@ interface Props {
 }
 
 const SatImages: React.FC<Props> = ({ data }) => {
-  const [image, setImage] = useState("")
-  const [imageId, setImageId] = useState("")
-  const [url, setUrl] = useState((data?.images as any)[0].image?.ndvi)
   const result = data?.images?.reverse()
+  const [url, setUrl] = useState((result as any)[0].image?.ndvi)
+  const [imageId, setImageId] = useState(url.split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
+  const [image, setImage] = useState(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
   
   useEffect(() => {
     setImageId((url as any).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
     setImage(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
   }, [image, imageId, url])
+
   return (
     <>
       <ContentWrapper>
@@ -38,7 +39,6 @@ const SatImages: React.FC<Props> = ({ data }) => {
         </NdviImageContainer>
       </ContentWrapper>
       <Line/>
-      
       <ContentWrapper>
         {!!result &&
           result.map((img) => 

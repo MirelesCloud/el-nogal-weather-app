@@ -23,7 +23,6 @@ interface Props {
 
 const LeafletMap: React.FC<Props> = ({ image }) => {
 
- // const { point } = useContext(LayerContext)
   return (
     <Map
       style={{height: "50vh", width: "100vw"}}
@@ -34,7 +33,6 @@ const LeafletMap: React.FC<Props> = ({ image }) => {
         <ImageOverlay
           bounds={polygon as any}
           url={image as any}
-
         />
       </LayerGroup>
       <TileLayer
