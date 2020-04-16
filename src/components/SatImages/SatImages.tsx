@@ -23,17 +23,26 @@ const SatImages: React.FC<Props> = ({ data }) => {
   const [url, setUrl] = useState((result as any)[0].image?.ndvi)
   const [imageId, setImageId] = useState(url.split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
   const [image, setImage] = useState(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
+  //const [imageType, setImageType] = useState((result as any)[0]?.image?.ndvi)
   
   useEffect(() => {
     setImageId((url as any).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
     setImage(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
   }, [image, imageId, url])
 
+
   return (
     <>
       <ContentWrapper>
         <NdviImageContainer>
+         {/*   <select value={imageType}>
+            <option value={(result as any)[0].image?.ndvi}>NDVI</option>
+            <option value={(result as any)[0].image?.evi}>EVI</option>
+            <option value="C">Truecolor</option>
+            <option value="D">Falsecolor</option>
+           </select> */}
           <LayerContextProvider>
+            
             <LeafletMap image={image} />
           </LayerContextProvider>
         </NdviImageContainer>

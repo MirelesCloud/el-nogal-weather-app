@@ -26,6 +26,11 @@ export type Clouds = {
   all?: Maybe<Scalars['Int']>;
 };
 
+export type CropGrowth = {
+   __typename?: 'CropGrowth';
+  geometry?: Maybe<Scalars['String']>;
+};
+
 export type CurrentWeather = {
    __typename?: 'CurrentWeather';
   dt?: Maybe<Scalars['Int']>;
@@ -33,6 +38,15 @@ export type CurrentWeather = {
   main?: Maybe<Main>;
   wind?: Maybe<Wind>;
   clouds?: Maybe<Clouds>;
+};
+
+export type Daily = {
+   __typename?: 'Daily';
+  date?: Maybe<Scalars['String']>;
+  et0?: Maybe<Scalars['Float']>;
+  description?: Maybe<Scalars['String']>;
+  precipitation?: Maybe<Scalars['Int']>;
+  icon?: Maybe<Scalars['String']>;
 };
 
 export type Data = {
@@ -61,6 +75,13 @@ export type Image = {
   evi?: Maybe<Scalars['String']>;
 };
 
+export type IrriSat = {
+   __typename?: 'IrriSat';
+  series?: Maybe<Series>;
+  daily?: Maybe<Array<Maybe<Daily>>>;
+  forecast?: Maybe<Scalars['String']>;
+};
+
 export type Main = {
    __typename?: 'Main';
   temp?: Maybe<Scalars['Float']>;
@@ -71,6 +92,19 @@ export type Main = {
   sea_level?: Maybe<Scalars['Float']>;
   grnd_level?: Maybe<Scalars['Float']>;
   temp_kf?: Maybe<Scalars['Float']>;
+};
+
+export type MapsDates = {
+   __typename?: 'MapsDates';
+  date?: Maybe<Scalars['String']>;
+  dateurl?: Maybe<Scalars['String']>;
+};
+
+export type MapsLayers = {
+   __typename?: 'MapsLayers';
+  token?: Maybe<Scalars['String']>;
+  mapid?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Ndvi = {
@@ -103,6 +137,12 @@ export type Query = {
   images?: Maybe<Array<Maybe<SatImages>>>;
   ndvi?: Maybe<Array<Maybe<Ndvi>>>;
   uvi?: Maybe<Uvi>;
+  irrisat?: Maybe<IrriSat>;
+  daily?: Maybe<Array<Maybe<Daily>>>;
+  series?: Maybe<Series>;
+  mapsDates?: Maybe<Array<Maybe<MapsDates>>>;
+  mapsLayers?: Maybe<Array<Maybe<MapsLayers>>>;
+  cropGrowth?: Maybe<CropGrowth>;
 };
 
 export type Rain = {
@@ -121,6 +161,13 @@ export type SatImages = {
   tile?: Maybe<Tile>;
   stats?: Maybe<Stats>;
   data?: Maybe<Data>;
+};
+
+export type Series = {
+   __typename?: 'Series';
+  timestamp?: Maybe<Array<Maybe<Scalars['String']>>>;
+  et0tall?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  et0short?: Maybe<Array<Maybe<Scalars['Float']>>>;
 };
 
 export type Soil = {
@@ -223,6 +270,20 @@ export type ForecastDataQuery = (
       { __typename?: 'Clouds' }
       & Pick<Clouds, 'all'>
     )> }
+  )>>> }
+);
+
+export type IrriSatQueryVariables = {};
+
+
+export type IrriSatQuery = (
+  { __typename?: 'Query' }
+  & { daily: Maybe<Array<Maybe<(
+    { __typename?: 'Daily' }
+    & Pick<Daily, 'date' | 'et0' | 'description' | 'icon' | 'precipitation'>
+  )>>>, mapsDates: Maybe<Array<Maybe<(
+    { __typename?: 'MapsDates' }
+    & Pick<MapsDates, 'date' | 'dateurl'>
   )>>> }
 );
 
@@ -418,6 +479,63 @@ export function useForecastDataLazyQuery(baseOptions?: ApolloReactHooks.LazyQuer
 export type ForecastDataQueryHookResult = ReturnType<typeof useForecastDataQuery>;
 export type ForecastDataLazyQueryHookResult = ReturnType<typeof useForecastDataLazyQuery>;
 export type ForecastDataQueryResult = ApolloReactCommon.QueryResult<ForecastDataQuery, ForecastDataQueryVariables>;
+export const IrriSatDocument = gql`
+    query IrriSat {
+  daily {
+    date
+    et0
+    description
+    icon
+    precipitation
+  }
+  mapsDates {
+    date
+    dateurl
+  }
+}
+    `;
+export type IrriSatComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<IrriSatQuery, IrriSatQueryVariables>, 'query'>;
+
+    export const IrriSatComponent = (props: IrriSatComponentProps) => (
+      <ApolloReactComponents.Query<IrriSatQuery, IrriSatQueryVariables> query={IrriSatDocument} {...props} />
+    );
+    
+export type IrriSatProps<TChildProps = {}> = ApolloReactHoc.DataProps<IrriSatQuery, IrriSatQueryVariables> & TChildProps;
+export function withIrriSat<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  IrriSatQuery,
+  IrriSatQueryVariables,
+  IrriSatProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, IrriSatQuery, IrriSatQueryVariables, IrriSatProps<TChildProps>>(IrriSatDocument, {
+      alias: 'irriSat',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useIrriSatQuery__
+ *
+ * To run a query within a React component, call `useIrriSatQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIrriSatQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIrriSatQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIrriSatQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<IrriSatQuery, IrriSatQueryVariables>) {
+        return ApolloReactHooks.useQuery<IrriSatQuery, IrriSatQueryVariables>(IrriSatDocument, baseOptions);
+      }
+export function useIrriSatLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<IrriSatQuery, IrriSatQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<IrriSatQuery, IrriSatQueryVariables>(IrriSatDocument, baseOptions);
+        }
+export type IrriSatQueryHookResult = ReturnType<typeof useIrriSatQuery>;
+export type IrriSatLazyQueryHookResult = ReturnType<typeof useIrriSatLazyQuery>;
+export type IrriSatQueryResult = ApolloReactCommon.QueryResult<IrriSatQuery, IrriSatQueryVariables>;
 export const NdviDataDocument = gql`
     query NdviData {
   ndvi {

@@ -350,6 +350,7 @@ export const ContainerList = styled.ul`
 `
 
 export const ListItem = styled.li`
+  font-size: 14px;
 `
 
 /* Modal */
