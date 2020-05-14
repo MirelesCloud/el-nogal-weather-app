@@ -1,6 +1,6 @@
-
 import * as React from 'react'
 import { useState } from 'react'
+import { useMutation } from '@apollo/react-hooks'
 import { IrriSatQuery } from '../../generated/graphql'
 import { 
   ContentWrapper,
@@ -14,9 +14,9 @@ interface Props {
   data: IrriSatQuery;
 }
 
+
 const IrriSat: React.FC<Props> = ({ data }) => {
-  const [option, setOption] = useState<string>("Select Date")
-  console.log(option)
+  console.log(data)
 
   const convert = (input: number) => {
     return input/25.4
@@ -40,14 +40,7 @@ const IrriSat: React.FC<Props> = ({ data }) => {
         ))
       }
     </ContentWrapper>
-    <ContentWrapper>
-      <select value={option} onChange={( e: React.ChangeEvent<HTMLSelectElement>, ): void => setOption(e.target.value)} >
-        {data?.mapsDates?.slice(0,52).map(res => 
-          <option key={res?.date!} value={res?.date!}>{res?.date}</option>
-          )
-        }
-      </select>
-    </ContentWrapper>
+   
     </>
   )
 }

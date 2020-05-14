@@ -5,10 +5,14 @@ import App from './App';
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
+import { InMemoryCache } from "apollo-cache-inmemory";
 import * as serviceWorker from './serviceWorker';
 
+const cache = new InMemoryCache()
+
 const client = new ApolloClient ({
-  uri: 'https://el-nogal.herokuapp.com/'
+  uri: 'https://el-nogal.herokuapp.com/',
+  cache
 });
 
 

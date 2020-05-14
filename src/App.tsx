@@ -5,6 +5,7 @@ import Forecast from './components/Forecast'
 import SatImages from './components/SatImages'
 import NdviData from './components/NDVIData'
 import IrriSat from './components/IrriSat'
+import MapLayer from './components/MapLayer'
 import Header from './Header'
 import { MainContainer, NavMenu, MenuButton, StyledLink } from './Styles'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -32,6 +33,9 @@ function App() {
             <MenuButton>
               <StyledLink to="/et0">EvapoTranspiration</StyledLink>
             </MenuButton>
+            <MenuButton>
+              <StyledLink to="/map">Maps</StyledLink>
+            </MenuButton>
           </NavMenu>
           <Switch >
             <Route exact path="/">
@@ -48,6 +52,9 @@ function App() {
             </Route>
             <Route path="/et0">
               <IrriSat/>
+            </Route>
+            <Route path="/map">
+              <MapLayer/>
             </Route>
           </Switch>
         </Router>

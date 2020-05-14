@@ -16,10 +16,12 @@ const API_KEY = process.env.REACT_APP_AGRO_API_KEY
 
 interface Props {
   data: SatImagesQuery;
+  
 }
 
 const SatImages: React.FC<Props> = ({ data }) => {
-  const result = data?.images?.reverse()
+  /* const result = data?.images?.reverse() */
+  const result = data?.images
   const [url, setUrl] = useState((result as any)[0].image?.ndvi)
   const [imageId, setImageId] = useState(url.split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
   const [image, setImage] = useState(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
@@ -29,6 +31,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
     setImageId((url as any).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
     setImage(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
   }, [image, imageId, url])
+
 
 
   return (
@@ -50,9 +53,8 @@ const SatImages: React.FC<Props> = ({ data }) => {
       <Line/>
       <ContentWrapper>
         {!!result &&
-          result.map((img) => 
-          !!image && (
-            <Card key={img?.dt!}>
+          result.reverse().map((img, idx) => (
+            <Card key={idx}>
               <CardBody  onClick={() => setUrl(img?.image?.ndvi)}>
                 <CardText>
                 {new Date(img?.dt!* 1000).toLocaleDateString([], {day: 'numeric', month: 'short', year: 'numeric'})}

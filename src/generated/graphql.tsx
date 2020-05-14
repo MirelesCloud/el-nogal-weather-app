@@ -94,6 +94,12 @@ export type Main = {
   temp_kf?: Maybe<Scalars['Float']>;
 };
 
+export type MapDates = {
+   __typename?: 'MapDates';
+  date?: Maybe<Scalars['String']>;
+  dateurl?: Maybe<Scalars['String']>;
+};
+
 export type MapsDates = {
    __typename?: 'MapsDates';
   date?: Maybe<Scalars['String']>;
@@ -105,6 +111,16 @@ export type MapsLayers = {
   token?: Maybe<Scalars['String']>;
   mapid?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+   __typename?: 'Mutation';
+  mapDate?: Maybe<Array<Maybe<MapsLayers>>>;
+};
+
+
+export type MutationMapDateArgs = {
+  date?: Maybe<Scalars['String']>;
 };
 
 export type Ndvi = {
@@ -140,8 +156,8 @@ export type Query = {
   irrisat?: Maybe<IrriSat>;
   daily?: Maybe<Array<Maybe<Daily>>>;
   series?: Maybe<Series>;
-  mapsDates?: Maybe<Array<Maybe<MapsDates>>>;
-  mapsLayers?: Maybe<Array<Maybe<MapsLayers>>>;
+  mapLayers?: Maybe<Array<Maybe<MapsLayers>>>;
+  mapDates?: Maybe<Array<Maybe<MapDates>>>;
   cropGrowth?: Maybe<CropGrowth>;
 };
 
@@ -281,9 +297,30 @@ export type IrriSatQuery = (
   & { daily: Maybe<Array<Maybe<(
     { __typename?: 'Daily' }
     & Pick<Daily, 'date' | 'et0' | 'description' | 'icon' | 'precipitation'>
-  )>>>, mapsDates: Maybe<Array<Maybe<(
-    { __typename?: 'MapsDates' }
-    & Pick<MapsDates, 'date' | 'dateurl'>
+  )>>> }
+);
+
+export type MapDatesQueryVariables = {};
+
+
+export type MapDatesQuery = (
+  { __typename?: 'Query' }
+  & { mapDates: Maybe<Array<Maybe<(
+    { __typename?: 'MapDates' }
+    & Pick<MapDates, 'date' | 'dateurl'>
+  )>>> }
+);
+
+export type MapLayerMutationVariables = {
+  date: Scalars['String'];
+};
+
+
+export type MapLayerMutation = (
+  { __typename?: 'Mutation' }
+  & { mapDate: Maybe<Array<Maybe<(
+    { __typename?: 'MapsLayers' }
+    & Pick<MapsLayers, 'token' | 'mapid' | 'name'>
   )>>> }
 );
 
@@ -488,10 +525,6 @@ export const IrriSatDocument = gql`
     icon
     precipitation
   }
-  mapsDates {
-    date
-    dateurl
-  }
 }
     `;
 export type IrriSatComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<IrriSatQuery, IrriSatQueryVariables>, 'query'>;
@@ -536,6 +569,107 @@ export function useIrriSatLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
 export type IrriSatQueryHookResult = ReturnType<typeof useIrriSatQuery>;
 export type IrriSatLazyQueryHookResult = ReturnType<typeof useIrriSatLazyQuery>;
 export type IrriSatQueryResult = ApolloReactCommon.QueryResult<IrriSatQuery, IrriSatQueryVariables>;
+export const MapDatesDocument = gql`
+    query MapDates {
+  mapDates {
+    date
+    dateurl
+  }
+}
+    `;
+export type MapDatesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<MapDatesQuery, MapDatesQueryVariables>, 'query'>;
+
+    export const MapDatesComponent = (props: MapDatesComponentProps) => (
+      <ApolloReactComponents.Query<MapDatesQuery, MapDatesQueryVariables> query={MapDatesDocument} {...props} />
+    );
+    
+export type MapDatesProps<TChildProps = {}> = ApolloReactHoc.DataProps<MapDatesQuery, MapDatesQueryVariables> & TChildProps;
+export function withMapDates<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  MapDatesQuery,
+  MapDatesQueryVariables,
+  MapDatesProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, MapDatesQuery, MapDatesQueryVariables, MapDatesProps<TChildProps>>(MapDatesDocument, {
+      alias: 'mapDates',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useMapDatesQuery__
+ *
+ * To run a query within a React component, call `useMapDatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMapDatesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMapDatesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMapDatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MapDatesQuery, MapDatesQueryVariables>) {
+        return ApolloReactHooks.useQuery<MapDatesQuery, MapDatesQueryVariables>(MapDatesDocument, baseOptions);
+      }
+export function useMapDatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MapDatesQuery, MapDatesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<MapDatesQuery, MapDatesQueryVariables>(MapDatesDocument, baseOptions);
+        }
+export type MapDatesQueryHookResult = ReturnType<typeof useMapDatesQuery>;
+export type MapDatesLazyQueryHookResult = ReturnType<typeof useMapDatesLazyQuery>;
+export type MapDatesQueryResult = ApolloReactCommon.QueryResult<MapDatesQuery, MapDatesQueryVariables>;
+export const MapLayerDocument = gql`
+    mutation MapLayer($date: String!) {
+  mapDate(date: $date) {
+    token
+    mapid
+    name
+  }
+}
+    `;
+export type MapLayerMutationFn = ApolloReactCommon.MutationFunction<MapLayerMutation, MapLayerMutationVariables>;
+export type MapLayerComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<MapLayerMutation, MapLayerMutationVariables>, 'mutation'>;
+
+    export const MapLayerComponent = (props: MapLayerComponentProps) => (
+      <ApolloReactComponents.Mutation<MapLayerMutation, MapLayerMutationVariables> mutation={MapLayerDocument} {...props} />
+    );
+    
+export type MapLayerProps<TChildProps = {}> = ApolloReactHoc.MutateProps<MapLayerMutation, MapLayerMutationVariables> & TChildProps;
+export function withMapLayer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  MapLayerMutation,
+  MapLayerMutationVariables,
+  MapLayerProps<TChildProps>>) {
+    return ApolloReactHoc.withMutation<TProps, MapLayerMutation, MapLayerMutationVariables, MapLayerProps<TChildProps>>(MapLayerDocument, {
+      alias: 'mapLayer',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useMapLayerMutation__
+ *
+ * To run a mutation, you first call `useMapLayerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMapLayerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mapLayerMutation, { data, loading, error }] = useMapLayerMutation({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useMapLayerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<MapLayerMutation, MapLayerMutationVariables>) {
+        return ApolloReactHooks.useMutation<MapLayerMutation, MapLayerMutationVariables>(MapLayerDocument, baseOptions);
+      }
+export type MapLayerMutationHookResult = ReturnType<typeof useMapLayerMutation>;
+export type MapLayerMutationResult = ApolloReactCommon.MutationResult<MapLayerMutation>;
+export type MapLayerMutationOptions = ApolloReactCommon.BaseMutationOptions<MapLayerMutation, MapLayerMutationVariables>;
 export const NdviDataDocument = gql`
     query NdviData {
   ndvi {

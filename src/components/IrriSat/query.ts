@@ -9,12 +9,7 @@ export const QUERY_IRR_SAT = gql`
      icon
      precipitation
    }
-
-   mapsDates {
-     date
-     dateurl
-   }
-
-
+  
  }
 `
+
