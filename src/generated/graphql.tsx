@@ -157,8 +157,14 @@ export type Query = {
   daily?: Maybe<Array<Maybe<Daily>>>;
   series?: Maybe<Series>;
   mapLayers?: Maybe<Array<Maybe<MapsLayers>>>;
+  mapImage?: Maybe<Array<Maybe<MapsLayers>>>;
   mapDates?: Maybe<Array<Maybe<MapDates>>>;
   cropGrowth?: Maybe<CropGrowth>;
+};
+
+
+export type QueryMapLayersArgs = {
+  date?: Maybe<Scalars['String']>;
 };
 
 export type Rain = {
@@ -311,14 +317,12 @@ export type MapDatesQuery = (
   )>>> }
 );
 
-export type MapLayerMutationVariables = {
-  date: Scalars['String'];
-};
+export type MapImageQueryVariables = {};
 
 
-export type MapLayerMutation = (
-  { __typename?: 'Mutation' }
-  & { mapDate: Maybe<Array<Maybe<(
+export type MapImageQuery = (
+  { __typename?: 'Query' }
+  & { mapImage: Maybe<Array<Maybe<(
     { __typename?: 'MapsLayers' }
     & Pick<MapsLayers, 'token' | 'mapid' | 'name'>
   )>>> }
@@ -619,57 +623,57 @@ export function useMapDatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type MapDatesQueryHookResult = ReturnType<typeof useMapDatesQuery>;
 export type MapDatesLazyQueryHookResult = ReturnType<typeof useMapDatesLazyQuery>;
 export type MapDatesQueryResult = ApolloReactCommon.QueryResult<MapDatesQuery, MapDatesQueryVariables>;
-export const MapLayerDocument = gql`
-    mutation MapLayer($date: String!) {
-  mapDate(date: $date) {
+export const MapImageDocument = gql`
+    query MapImage {
+  mapImage {
     token
     mapid
     name
   }
 }
     `;
-export type MapLayerMutationFn = ApolloReactCommon.MutationFunction<MapLayerMutation, MapLayerMutationVariables>;
-export type MapLayerComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<MapLayerMutation, MapLayerMutationVariables>, 'mutation'>;
+export type MapImageComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<MapImageQuery, MapImageQueryVariables>, 'query'>;
 
-    export const MapLayerComponent = (props: MapLayerComponentProps) => (
-      <ApolloReactComponents.Mutation<MapLayerMutation, MapLayerMutationVariables> mutation={MapLayerDocument} {...props} />
+    export const MapImageComponent = (props: MapImageComponentProps) => (
+      <ApolloReactComponents.Query<MapImageQuery, MapImageQueryVariables> query={MapImageDocument} {...props} />
     );
     
-export type MapLayerProps<TChildProps = {}> = ApolloReactHoc.MutateProps<MapLayerMutation, MapLayerMutationVariables> & TChildProps;
-export function withMapLayer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+export type MapImageProps<TChildProps = {}> = ApolloReactHoc.DataProps<MapImageQuery, MapImageQueryVariables> & TChildProps;
+export function withMapImage<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
-  MapLayerMutation,
-  MapLayerMutationVariables,
-  MapLayerProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, MapLayerMutation, MapLayerMutationVariables, MapLayerProps<TChildProps>>(MapLayerDocument, {
-      alias: 'mapLayer',
+  MapImageQuery,
+  MapImageQueryVariables,
+  MapImageProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, MapImageQuery, MapImageQueryVariables, MapImageProps<TChildProps>>(MapImageDocument, {
+      alias: 'mapImage',
       ...operationOptions
     });
 };
 
 /**
- * __useMapLayerMutation__
+ * __useMapImageQuery__
  *
- * To run a mutation, you first call `useMapLayerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useMapLayerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
+ * To run a query within a React component, call `useMapImageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMapImageQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const [mapLayerMutation, { data, loading, error }] = useMapLayerMutation({
+ * const { data, loading, error } = useMapImageQuery({
  *   variables: {
- *      date: // value for 'date'
  *   },
  * });
  */
-export function useMapLayerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<MapLayerMutation, MapLayerMutationVariables>) {
-        return ApolloReactHooks.useMutation<MapLayerMutation, MapLayerMutationVariables>(MapLayerDocument, baseOptions);
+export function useMapImageQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MapImageQuery, MapImageQueryVariables>) {
+        return ApolloReactHooks.useQuery<MapImageQuery, MapImageQueryVariables>(MapImageDocument, baseOptions);
       }
-export type MapLayerMutationHookResult = ReturnType<typeof useMapLayerMutation>;
-export type MapLayerMutationResult = ApolloReactCommon.MutationResult<MapLayerMutation>;
-export type MapLayerMutationOptions = ApolloReactCommon.BaseMutationOptions<MapLayerMutation, MapLayerMutationVariables>;
+export function useMapImageLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MapImageQuery, MapImageQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<MapImageQuery, MapImageQueryVariables>(MapImageDocument, baseOptions);
+        }
+export type MapImageQueryHookResult = ReturnType<typeof useMapImageQuery>;
+export type MapImageLazyQueryHookResult = ReturnType<typeof useMapImageLazyQuery>;
+export type MapImageQueryResult = ApolloReactCommon.QueryResult<MapImageQuery, MapImageQueryVariables>;
 export const NdviDataDocument = gql`
     query NdviData {
   ndvi {
