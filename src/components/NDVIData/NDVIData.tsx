@@ -12,14 +12,13 @@ interface Props {
 }
 
 const NdviData: React.FC<Props> = ({ data }) => {
-  const result = data?.ndvi?.reverse()
 
   return (
     <>
       <ContentWrapper style={{ height: "300px", width: "auto"}}>
         <h3>NDVI History</h3>
         <ResponsiveContainer>
-        <LineChart data={result as any}>
+        <LineChart data={data.ndvi as any}>
             <Line type="monotone" dataKey="data.max" stroke="#009933" name="max"/>
             <Line type="monotone" dataKey="data.mean" stroke="#0066ff" name="mean" />
             <Line type="monotone" dataKey="data.min" stroke="#ff6666" name="min"/>
