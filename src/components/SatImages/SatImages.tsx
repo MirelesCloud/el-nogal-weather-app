@@ -13,6 +13,7 @@ import {
   } from "../../Styles"
 
 const API_KEY = process.env.REACT_APP_AGRO_API_KEY
+console.log(process.env.REACT_APP_AGRO_API_KEY)
 
 interface Props {
   data: SatImagesQuery;
