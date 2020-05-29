@@ -178,6 +178,14 @@ export const LoadContainer = styled.div`
   text-align: center;
 
 `
+
+/*Select*/
+export const Select = styled.select`
+  width: 150px;
+  font-size: 1rem;
+  padding: 5px;
+`
+
 /* Body */
 export const MainContainer = styled('div')`
   max-width: 1010px;

@@ -5,11 +5,11 @@ import { LayerContextProvider } from './LayerContext'
 import LeafletMap from './LeafletMap'
 import {
   ContentWrapper,
-  Card,
+  Select,
+  
   NdviImageContainer,
-  CardBody,
-  CardText,
-  Line
+  
+  
   } from "../../Styles"
 
 const API_KEY = process.env.REACT_APP_AGRO_API_KEY
@@ -40,7 +40,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
   return (
     <>
       <ContentWrapper>
-        <select value={option} onChange={( e: React.ChangeEvent<HTMLSelectElement>): void => { 
+        <Select value={option} onChange={( e: React.ChangeEvent<HTMLSelectElement>): void => { 
           setOption(e.target.value); setUrl(e.target.value); 
         }} >
           {!!result &&
@@ -50,7 +50,7 @@ const SatImages: React.FC<Props> = ({ data }) => {
               </option>
             ))
          }
-        </select>
+        </Select>
       </ContentWrapper>
       <ContentWrapper>
         <NdviImageContainer>
