@@ -25,7 +25,7 @@ const LeafletMap: React.FC<Props> = ({ image }) => {
 
   return (
     <Map
-      style={{height: "50vh", width: "100vw"}}
+      style={{height: "75vh", width: "100vw"}}
       center={defaultLatLng}
       zoom={zoom}
     >

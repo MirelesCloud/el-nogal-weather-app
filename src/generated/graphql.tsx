@@ -262,12 +262,12 @@ export type CurrentWeatherQuery = (
       { __typename?: 'Clouds' }
       & Pick<Clouds, 'all'>
     )> }
-  )>, soil: Maybe<(
-    { __typename?: 'Soil' }
-    & Pick<Soil, 'd10' | 'moisture' | 't0'>
   )>, uvi: Maybe<(
     { __typename?: 'UVI' }
     & Pick<Uvi, 'uvi'>
+  )>, soil: Maybe<(
+    { __typename?: 'Soil' }
+    & Pick<Soil, 'dt' | 'd10' | 'moisture' | 't0'>
   )> }
 );
 
@@ -396,13 +396,14 @@ export const CurrentWeatherDocument = gql`
       all
     }
   }
+  uvi {
+    uvi
+  }
   soil {
+    dt
     d10
     moisture
     t0
-  }
-  uvi {
-    uvi
   }
 }
     `;

@@ -87,10 +87,6 @@ export const NavLeft = styled('div')`
     @media(max-width: 768px) {
       font-size: 1.3em;
     }
-
-   
-
-   
 `
 
 export const NavCenter = styled('div')`

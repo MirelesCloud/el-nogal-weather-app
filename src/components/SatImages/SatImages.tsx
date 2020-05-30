@@ -6,10 +6,10 @@ import LeafletMap from './LeafletMap'
 import {
   ContentWrapper,
   Select,
-  
   NdviImageContainer,
-  
-  
+  ContainerLeft,
+  ContainerRight,
+  Row
   } from "../../Styles"
 
 const API_KEY = process.env.REACT_APP_AGRO_API_KEY
@@ -28,9 +28,6 @@ const SatImages: React.FC<Props> = ({ data }) => {
   const [imageId, setImageId] = useState(url.split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
   const [image, setImage] = useState(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
  
-
-
-  
   useEffect(() => {
     setImageId((url as any).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', ''))
     setImage(`http://api.agromonitoring.com/image/1.0/${imageId}?appid=${API_KEY}&paletteid=4`)
@@ -40,17 +37,26 @@ const SatImages: React.FC<Props> = ({ data }) => {
   return (
     <>
       <ContentWrapper>
-        <Select value={option} onChange={( e: React.ChangeEvent<HTMLSelectElement>): void => { 
-          setOption(e.target.value); setUrl(e.target.value); 
-        }} >
-          {!!result &&
-            result.map((img, idx) => (
-              <option key={idx} value={[img?.dt, img?.image?.ndvi]} >
-                { new Date(img?.dt!* 1000).toLocaleDateString([], {day: 'numeric', month: 'short', year: 'numeric'}) }
-              </option>
-            ))
-         }
+        <ContainerLeft>
+          <Select value={option} onChange={( e: React.ChangeEvent<HTMLSelectElement>): void => { 
+            setOption(e.target.value); setUrl(e.target.value); 
+          }} >
+            {!!result &&
+              result.map((img, idx) => (
+                <option key={idx} value={[img?.dt, img?.image?.ndvi]} >
+                  { new Date(img?.dt!* 1000).toLocaleDateString([], {day: 'numeric', month: 'short', year: 'numeric'}) }
+                </option>
+              ))
+          }
+          </Select>
+
+        </ContainerLeft>
+        <ContainerRight>
+        <Select>
+         
         </Select>
+        </ContainerRight>
+        
       </ContentWrapper>
       <ContentWrapper>
         <NdviImageContainer>
