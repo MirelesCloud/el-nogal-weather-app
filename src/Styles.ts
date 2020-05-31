@@ -1,5 +1,50 @@
 import styled from '@emotion/styled'
+import { Global, css } from '@emotion/core'
 import { Link } from 'react-router-dom'
+
+export const Device = styled.div`
+  position: absolute;
+  right: 2rem;
+  height: $device-height;
+  width: $device-width;
+  padding: 90px 10px;
+  border: 5px solid #2f2f2f;
+  border-radius: 60px;
+  background-color: #171717;
+  box-shadow: 0 0 50px 10px rgba(0,0,0,0.4);
+  
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+  }
+  
+  &:before {
+    width: 20%;
+    height: 10px;
+    top: 40px;
+    left: 40%;
+    border-radius: 10px;
+    background-color: #2f2f2f;
+  }
+  
+  &:after {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 5px #2f2f2f;
+    left: calc(50% - 25px);
+    bottom: 20px;
+  }
+
+`
+
+export const Section = styled.div`
+  height: calc(100% - 50px);
+  width: 100%;
+  overflow: hidden;
+  background-color: $color-night;
+`
 
 export const PageContainer = styled.div`
   position: relative;
@@ -187,15 +232,20 @@ export const MainContainer = styled('div')`
   max-width: 1010px;
   width: 100%;
   margin: 20px auto;
-  padding-bottom: 3rem;
+  flex-direction: column;
+  
 `
 
 export const ContentWrapper = styled('div')`
-  margin: 50px 25px;
   display: flex;
-  flex-wrap: wrap;
-  flex-flow: center;
   
+`
+
+export const ForecastWrapper = styled.div`
+ margin-top: 50px;
+ display: flex;
+ flex-wrap: wrap;
+ 
 `
 
 export const Footer = styled.footer`
@@ -314,16 +364,17 @@ export const ContainerDetails = styled('div')`
 `
 
 export const ContainerLeft = styled('div')`
+  margin-right: 40px;
+  width: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   
 `
 
 export const ContainerRight = styled('div')`
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   flex-direction: column;
 

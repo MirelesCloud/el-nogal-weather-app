@@ -268,7 +268,23 @@ export type CurrentWeatherQuery = (
   )>, soil: Maybe<(
     { __typename?: 'Soil' }
     & Pick<Soil, 'dt' | 'd10' | 'moisture' | 't0'>
-  )> }
+  )>, forecast: Maybe<Array<Maybe<(
+    { __typename?: 'Forecast' }
+    & Pick<Forecast, 'dt'>
+    & { weather: Maybe<(
+      { __typename?: 'Weather' }
+      & Pick<Weather, 'id' | 'main' | 'description' | 'icon'>
+    )>, main: Maybe<(
+      { __typename?: 'Main' }
+      & Pick<Main, 'temp' | 'pressure' | 'humidity' | 'temp_min' | 'temp_max' | 'sea_level' | 'grnd_level' | 'temp_kf'>
+    )>, wind: Maybe<(
+      { __typename?: 'Wind' }
+      & Pick<Wind, 'speed' | 'deg'>
+    )>, clouds: Maybe<(
+      { __typename?: 'Clouds' }
+      & Pick<Clouds, 'all'>
+    )> }
+  )>>> }
 );
 
 export type ForecastDataQueryVariables = {};
@@ -404,6 +420,32 @@ export const CurrentWeatherDocument = gql`
     d10
     moisture
     t0
+  }
+  forecast {
+    dt
+    weather {
+      id
+      main
+      description
+      icon
+    }
+    main {
+      temp
+      pressure
+      humidity
+      temp_min
+      temp_max
+      sea_level
+      grnd_level
+      temp_kf
+    }
+    wind {
+      speed
+      deg
+    }
+    clouds {
+      all
+    }
   }
 }
     `;

@@ -7,6 +7,7 @@ import NdviData from './components/NDVIData'
 import IrriSat from './components/IrriSat'
 import MapLayer from './components/MapLayer'
 import Header from './Header'
+import { Global, css } from '@emotion/core'
 import { MainContainer, NavMenu, MenuButton, StyledLink } from './Styles'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -14,8 +15,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 function App() {
   return (
     <Fragment>
+      <Global styles={{margin: '0', padding: '0'}}/>
       <Header/>
-      <MainContainer>
+   
         <Router>
           <NavMenu>
             <MenuButton>
@@ -58,7 +60,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
-      </MainContainer>
+      
     </Fragment>
   );
 }

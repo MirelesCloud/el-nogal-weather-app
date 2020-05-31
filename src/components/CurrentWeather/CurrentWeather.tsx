@@ -1,5 +1,21 @@
 import * as React from 'react'
 import { CurrentWeatherQuery } from '../../generated/graphql'
+import {MasterContainer, Today, TodayHeader, CurrentTemperature, 
+  CurrentStats,
+  CurrentStatsLabel,
+  CurrentStatsValue,
+  CurrentTemperatureContent,
+  CurrentTemperatureIcon,
+  CurrentTemperatureIconContainer,
+  CurrentTemperatureValue,
+  CurrentTemperatureSummary,
+  HourlyWeather,
+  HourlyWeatherContainer,
+  HourlyWeatherHeader,
+  HourlyWeatherHour,
+  HourlyWeatherItem,
+  Next5Days} from "../../NewStyle"
+
 import {
   ContentWrapper,
   ContainerDetails,
@@ -9,8 +25,17 @@ import {
   ContainerHeader,
   ContainerList,
   ListItem,
+  Card,
+  CardBody,
+  CardImage,
+  CardText,
+  CardHeader,
+  Row,
+  ForecastWrapper,
+  MainContainer
 
-} from "../../Styles"
+
+} from "../../Styles" 
 
 const feature = require('./IMG_2169.png')
 
@@ -20,16 +45,10 @@ interface Props {
 
 
 const CurrentWeather: React.FC<Props> = ({ data }) => {
+  console.log(data)
    
   const currentWeather: Array<any> = [
-    {
-      id: '',
-      data: <img src={`http://openweathermap.org/img/wn/${data?.weather?.weather?.icon!}@2x.png`} alt='icon'/>
-    },
-    {
-      id: 'Current',
-      data: (Math.round((((data?.weather?.main?.temp!) - 273.15) * (9/5) + 32)* 1e0)/1e0) + ' F'
-    },
+   
     {
       id: 'High',
       data: Math.round((((data?.weather?.main?.temp_max!) - 273.15) * (9/5) + 32)* 1e0)/1e0 + ' F'
@@ -77,7 +96,67 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
   ] 
 
   return (
-    <>
+    <MasterContainer>
+      <Today>
+        <TodayHeader>
+          {new Date(data?.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}
+
+        </TodayHeader>
+      </Today>
+      <CurrentTemperature>
+        <CurrentTemperatureIconContainer>
+        <img src={`http://openweathermap.org/img/wn/${data?.weather?.weather?.icon!}@2x.png`} alt='icon'/>
+          
+        </CurrentTemperatureIconContainer>
+        <CurrentTemperatureContent>
+          <CurrentTemperatureValue>
+            {(Math.round((((data?.weather?.main?.temp!) - 273.15) * (9/5) + 32)* 1e0)/1e0) + ' F'}
+
+          </CurrentTemperatureValue>
+          <CurrentTemperatureSummary>
+            {data?.weather?.weather?.description!}
+          </CurrentTemperatureSummary>
+
+        </CurrentTemperatureContent>
+        
+      </CurrentTemperature>
+      <CurrentStats>
+        {!!currentWeather &&
+          currentWeather.map(data => (
+            <div key={data.id}>
+              <CurrentStatsValue>
+                {data.data}
+    
+              </CurrentStatsValue>
+              <CurrentStatsLabel>
+                {data.id}
+    
+              </CurrentStatsLabel>
+            </div>
+          ))
+        }
+      </CurrentStats>
+      <HourlyWeather>
+        <HourlyWeatherHeader>Hourly Forecast</HourlyWeatherHeader>
+        <HourlyWeatherContainer>
+          {!!data.forecast &&
+            data.forecast.map(data => (
+              <HourlyWeatherItem key={data?.dt!}>
+                <HourlyWeatherHour>{new Date(data?.dt!* 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</HourlyWeatherHour>
+                <img src={data?.weather?.icon!} alt={data?.weather?.description!}/>
+                <div>{data?.main?.temp!}</div>
+
+              </HourlyWeatherItem>
+            ))
+
+          }
+        </HourlyWeatherContainer>
+
+
+      </HourlyWeather>
+    </MasterContainer>
+  /*   <MainContainer>
+   
       <ContentWrapper>
           <ContainerDetails>
               <ContainerLeft>
@@ -105,8 +184,22 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
                   </ContainerList>
               </ContainerRight>
             </ContainerDetails>
+           
         </ContentWrapper>
-    </>
+        <ForecastWrapper>
+        {!!data.forecast &&
+            data.forecast.map(data => (
+              <Card key={data?.dt!}>
+                <CardBody>
+                  <CardImage src={data?.weather?.icon!} alt='icon'/>
+                </CardBody>
+
+              </Card>
+            ))
+
+          }
+        </ForecastWrapper>
+    </MainContainer> */
   )
 }
 

@@ -34,6 +34,32 @@ export const QUERY_CURRENT_WEATHER = gql`
       moisture
       t0
     }
+    forecast {
+      dt 
+      weather {
+        id
+        main
+        description
+        icon
+      }
+      main {
+        temp
+        pressure
+        humidity
+        temp_min
+        temp_max
+        sea_level
+        grnd_level
+        temp_kf
+      }
+      wind {
+        speed
+        deg
+      }
+      clouds {
+        all
+      }
+    }
 
   }
 
