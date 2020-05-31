@@ -142,9 +142,9 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
           {!!data.forecast &&
             data.forecast.map(data => (
               <HourlyWeatherItem key={data?.dt!}>
-                <HourlyWeatherHour>{new Date(data?.dt!* 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</HourlyWeatherHour>
-                <img src={data?.weather?.icon!} alt={data?.weather?.description!}/>
-                <div>{data?.main?.temp!}</div>
+                <HourlyWeatherHour>{new Date(data?.dt!* 1000).toLocaleTimeString([], {hour: '2-digit'})}</HourlyWeatherHour>
+                <img src={`http://openweathermap.org/img/wn/${data?.weather?.icon}@2x.png`} alt="icon"/>
+                <div>{((((data?.main?.temp!) - 273.15) * 9/5) + 32).toFixed(0)} F</div>
 
               </HourlyWeatherItem>
             ))

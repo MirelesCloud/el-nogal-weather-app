@@ -14,7 +14,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <Fragment>
+    <MainContainer>
+      <Fragment>
       <Global styles={{margin: '0', padding: '0'}}/>
       <Header/>
    
@@ -62,6 +63,9 @@ function App() {
         </Router>
       
     </Fragment>
+
+    </MainContainer>
+    
   );
 }
 
