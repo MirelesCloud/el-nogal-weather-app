@@ -11,6 +11,8 @@ export const MasterContainer = styled.div`
   }
 `
 
+
+
 export const Today = styled.div`
   width: 100%;
 
@@ -55,25 +57,64 @@ export const CurrentTemperatureSummary = styled.div`
   font-size: 1.125em;
 `
 export const CurrentStats = styled.div`
-  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
   
-
-  @media(min-width: 768px) {
-    width: 50%;
+  @media(min-width: 700px) {
+    width: 45%;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid rgba(255,255,255,0.5);
   }
+
+  
 `
 
 export const CurrentStatsValue = styled.div`
-  margin-top: 1em;
-  font-size: 1.44em;
+  padding: 0 0;
+  
+
+  border-radius: 5px;
+  font-size: 1.5em;
+  text-align: center;
+  position: relative;
+  flex-basis: 100%;
+  flex-basis: calc(25% - 5px);
+  margin: 20px;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+  
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+
+  @media (max-width: 992px) {
+    flex-basis: calc( 15% - 20px);
+  }
+
+  @media (max-width: 600px) {
+    flex-basis: calc(25% - 20px)
+  }
+
 `
 
 export const CurrentStatsLabel = styled.div`
   color: rgba(255,255,255,0.6);
+  text-align: center;
+  margin-bottom: 20px;
 `
 export const HourlyWeather = styled.div`
-  display: none;
+  
   width: 100%;
+  margin-top: 50px;
   
 
   @media(min-width: 768px) {
@@ -82,9 +123,9 @@ export const HourlyWeather = styled.div`
 `
 
 export const HourlyWeatherContainer = styled.div`
-  display: flex;
-  justify-content: space-between,
-  flex-wrap: wrap;
+margin-top: 50px;
+display: flex;
+flex-wrap: wrap;
   
 `
 
@@ -99,36 +140,35 @@ export const HourlyWeatherHeader = styled.h2`
 `
 
 export const HourlyWeatherItem = styled.div`
-  position: relative;
-  flex-basis: 100%;
-  flex-basis: calc(25% -5px);
-  margin: 5px;
-  
-  
+  padding: 0.8em 0;
+  width: 13%;
   border-radius: 5px;
   background-color: rgba(0,0,0,0.15);
-  font-size: 1em;
+  font-size: 1.125em;
   text-align: center;
+  position: relative;
+  flex-basis: 100%;
+  flex-basis: calc(10% - 5px);
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+  
   display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 
-  @media(min-width: 880px) {
-    width: 6.05em;
-  }
 
   @media (max-width: 992px) {
     flex-basis: calc( 15% - 20px);
   }
 
   @media (max-width: 600px) {
-    flex-basis: calc(25% - 20px)
+    flex-basis: calc(33.333% - 20px)
   }
-
 
 `
 

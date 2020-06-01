@@ -51,11 +51,11 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
    
     {
       id: 'High',
-      data: Math.round((((data?.weather?.main?.temp_max!) - 273.15) * (9/5) + 32)* 1e0)/1e0 + ' F'
+      data: Math.round((((data?.weather?.main?.temp_max!) - 273.15) * (9/5) + 32)* 1e0)/1e0 + 'F'
     },
     {
       id: 'Low',
-      data:  Math.round((((data?.weather?.main?.temp_min!) - 273.15) * (9/5) + 32) * 1e0)/1e0 + ' F'
+      data:  Math.round((((data?.weather?.main?.temp_min!) - 273.15) * (9/5) + 32) * 1e0)/1e0 + 'F'
     },
     {
       id: 'Wind Speed',
@@ -63,7 +63,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
     },
     {
       id: 'Humidity',
-      data: data?.weather?.main?.humidity! + ' %'
+      data: data?.weather?.main?.humidity! + '%'
     },
     {
       id: 'Pressure',
@@ -71,7 +71,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
     },
     { 
       id: 'Clouds',
-      data: data?.weather?.clouds?.all! + ' %'
+      data: data?.weather?.clouds?.all! + '%'
     },
     {
       id: 'UV Index',
@@ -80,17 +80,14 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
   ]
 
   const currentSoil: Array<any> = [
+    
     {
-      id: 'Time',
-      data: new Date((data?.soil?.dt!) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+      id: 'Soil Moisture',
+      data: Math.round((data?.soil?.moisture! * 27)) +  ` ft/yrd`
     },
     {
-      id: 'Moisture',
-      data: Math.round((data?.soil?.moisture! * 27)) + ' Cu. FT/Cu. Yard'
-    },
-    {
-      id: 'Surface Temp',
-      data: Math.round((((data?.soil?.t0!) - 273.15) * (9/5) + 32)* 1e0)/1e0 + ' F'
+      id: 'Soil Temp',
+      data: Math.round((((data?.soil?.t0!) - 273.15) * (9/5) + 32)* 1e0)/1e0 + 'F'
     }
 
   ] 
@@ -99,13 +96,14 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
     <MasterContainer>
       <Today>
         <TodayHeader>
-          {new Date(data?.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}
+          El Nogal
 
         </TodayHeader>
+        <div>{new Date(data?.weather?.dt!* 1000).toLocaleTimeString([], {weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'})}</div>
       </Today>
       <CurrentTemperature>
         <CurrentTemperatureIconContainer>
-        <img src={`http://openweathermap.org/img/wn/${data?.weather?.weather?.icon!}@2x.png`} alt='icon'/>
+        <img src={`http://openweathermap.org/img/wn/${data?.weather?.weather?.icon!}@2x.png`} alt='icon' />
           
         </CurrentTemperatureIconContainer>
         <CurrentTemperatureContent>
@@ -135,6 +133,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
             </div>
           ))
         }
+      
       </CurrentStats>
       <HourlyWeather>
         <HourlyWeatherHeader>Hourly Forecast</HourlyWeatherHeader>
@@ -142,6 +141,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
           {!!data.forecast &&
             data.forecast.map(data => (
               <HourlyWeatherItem key={data?.dt!}>
+                <div>{new Date(data?.dt!* 1000).toLocaleDateString([], {weekday: 'short'})}</div>
                 <HourlyWeatherHour>{new Date(data?.dt!* 1000).toLocaleTimeString([], {hour: '2-digit'})}</HourlyWeatherHour>
                 <img src={`http://openweathermap.org/img/wn/${data?.weather?.icon}@2x.png`} alt="icon"/>
                 <div>{((((data?.main?.temp!) - 273.15) * 9/5) + 32).toFixed(0)} F</div>
@@ -150,6 +150,7 @@ const CurrentWeather: React.FC<Props> = ({ data }) => {
             ))
 
           }
+          
         </HourlyWeatherContainer>
 
 

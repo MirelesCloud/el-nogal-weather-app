@@ -6,19 +6,16 @@ import SatImages from './components/SatImages'
 import NdviData from './components/NDVIData'
 import IrriSat from './components/IrriSat'
 import MapLayer from './components/MapLayer'
-import Header from './Header'
-import { Global, css } from '@emotion/core'
-import { MainContainer, NavMenu, MenuButton, StyledLink } from './Styles'
+import { MainContainer, NavMenu, MenuButton, StyledLink, PageContainer, InfoContainer } from './Styles'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 
 function App() {
   return (
-    <MainContainer>
-      <Fragment>
-      <Global styles={{margin: '0', padding: '0'}}/>
-      <Header/>
-   
+    <Fragment>
+      <PageContainer>
+      <MainContainer>
+        <InfoContainer>
         <Router>
           <NavMenu>
             <MenuButton>
@@ -61,11 +58,13 @@ function App() {
             </Route>
           </Switch>
         </Router>
-      
-    </Fragment>
 
-    </MainContainer>
-    
+        </InfoContainer>
+       
+      </MainContainer>
+      </PageContainer>    
+     
+    </Fragment>
   );
 }
 

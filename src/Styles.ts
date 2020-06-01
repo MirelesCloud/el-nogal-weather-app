@@ -47,8 +47,11 @@ export const Section = styled.div`
 `
 
 export const PageContainer = styled.div`
+  overlfow: hidden;
+  display: block;
   position: relative;
   min-height: 100vh;
+  padding-bottom: 2rem;
 `
 
 export const PageHeader = styled.div`
@@ -188,25 +191,26 @@ export const NavMenu = styled.ul`
   margin: 0;
   padding: 0;
   overflow: hidden;
+
 `
 
 export const MenuButton = styled.li`
   float: left;
   text-align: center;
+  
 `
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 16px;
   display: block;
+  color: white;
   
   &:hover {
-    background-color: #f7f7f5;
+    background-color: rgba(0,0,0,0.08);
   }
 
-  &:visited {
-    color: #000000;
-  }
+  
   
 `
 
@@ -228,6 +232,7 @@ export const Select = styled.select`
 `
 
 /* Body */
+
 export const MainContainer = styled('div')`
   max-width: 1010px;
   width: 100%;
@@ -235,16 +240,22 @@ export const MainContainer = styled('div')`
   flex-direction: column;
   
 `
+export const InfoContainer = styled.div`
+  max-width: 1010px;
+  width: 100%;
+  margin: 20px, auto;
+`
 
 export const ContentWrapper = styled('div')`
-  display: flex;
-  
+margin-top: 50px;
+display: flex;
+flex-wrap: wrap;
 `
 
 export const ForecastWrapper = styled.div`
- margin-top: 50px;
- display: flex;
- flex-wrap: wrap;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
  
 `
 
